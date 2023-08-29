@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasky Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body onload="loadInitialData()">
+    <!-- model(for pop up) for adding a new item -->
+
+    <!-- Button trigger modal(only for smaller screen size->media queries) -->
+    <div class="mobile_only_btn">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">
+        <i class="fa-solid fa-plus" ></i>Add New Item
+      </button>
+    </div>
+  
+  <!-- Modal for add new -->
+  <div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="addNewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addNewModalLabel">Add New Task</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <label for="image_Url" class="form-label">Image URL</label>
+                  <input type="url" class="form-control" id="image_Url" aria-describedby="emailHelp" placeholder="https://image.URL.displayimg.png">
+                </div>
+
+                <div class="mb-3">
+                    <label for="task_title" class="form-label">Task Title</label>
+                    <input type="text" class="form-control" id="task_title" aria-describedby="emailHelp" placeholder="Please enter your Task Title here" required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="tags" class="form-label">Task Type</label>
+                    <input type="text" class="form-control" id="tags" aria-describedby="emailHelp" placeholder="Please enter your Task type here" required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="task_Description" class="form-label">Task Description</label>
+                    <textarea type="email" class="form-control" id="task_Description" aria-describedby="emailHelp" placeholder="Please enter your Task Description here" rows="5" required></textarea>
+                  </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="handleSubmit()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- button triggor needs to be defined -->
+<div class="modal fade" id="showTAsk" tabindex="-1" aria-labelledby="showTAskLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="showTAskLabel">Task details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body task_Modal_Body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary" onclick="handleSubmit()">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+     
+
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Tasky Application</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+          <button class="btn btn-outline-success" type="submit" data-bs-toggle="modal" data-bs-target="#addNewModal"><i class="fa-solid fa-plus" ></i>Add New Item</button>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- search container for first section -->
+  <div class="container  text-center">
+    <section class="mt-4">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <div class="input-group flex-nowrap shadow-lg">
+                    <input type="search" class="form-control" placeholder="Search Task">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-brands fa-searchengin"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!--task contents(cards)  -->
+    <section class="mt-4">
+        <div class="row task_contents">
+            <h1>sample</h1>
+        </div>
+    </section>
+
+
+  </div>
+<!-- testing approach -->
+<!-- <div class="col -md-6 col-lg-4 mt-3" id=${id} key=${id}>
+    <div class=" card shadow task_card">
+      <div class="card-header d-flex gap-2 justify-content-end task_card_header">
+         <button type="button" class="btn btn-outline-info mr-2 name=${id}"><i class="fa-solid fa-pen-to-square"></i></button>
+         <button type="button" class="btn btn-outline-danger mr-2 name=${id}"><i class="fa-duotone fa-trash"></i></button>
+      </div>
+  
+      <div class="card-header">
+         ${
+          url &&
+          `<img src=${url} alt="card image" class="card-img-top" md-3 rounded-md/>`
+         }
+         <h4 class="card-title">${title}</h4>
+         <p class="card-text text-muted">${description}</p>
+         <div class="tags">
+            <span class=" badge text-white bg-primary m-1">${type}</span>
+         </div>
+
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#showTAsk">
+        Open Task
+        </button>
+      </div>
+    </div>
+</div> -->
+
+
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
