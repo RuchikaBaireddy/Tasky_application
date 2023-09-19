@@ -7,18 +7,24 @@ body{
     background-color: #ebf2ff !important;
 }
 
-.mobile_only_btn{
+.add__new__btn__mobile__only{
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     padding: 15px 10px;
     background-color: white;
     width: 100%;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
-@media only screen and (min-width: 768px){
-    .mobile_only_btn{
-        display:none;
+/* media queires */
+@media (min-width: 768px){
+    .add__new__btn__mobile__only{
+        display: none;
     }
 }
+
+
+/* .btn__custom{
+    color: blueviolet !important;
+} */
